@@ -32,8 +32,8 @@ public class DoorOpenClose : MonoBehaviour
                 LDPos.y = -3.5f;
                 RDPos.y = -3.5f;
                 
-                LDoor.transform.Translate(LDPos);
-                RDoor.transform.Translate(RDPos);
+                LDoor.transform.Translate(LDPos, Space.Self);
+                RDoor.transform.Translate(RDPos, Space.Self);
             }
         }
 
@@ -47,8 +47,8 @@ public class DoorOpenClose : MonoBehaviour
                 LDPos.y = 0.0f;
                 RDPos.y = 0.0f;
 
-                LDoor.transform.Translate(LDPos);
-                RDoor.transform.Translate(RDPos);
+                LDoor.transform.Translate(LDPos, Space.Self);
+                RDoor.transform.Translate(RDPos, Space.Self);
             }
         }
     }
