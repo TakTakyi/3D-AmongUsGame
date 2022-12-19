@@ -13,12 +13,14 @@ public class DoorOpenClose : MonoBehaviour
     Vector3 RDSPos;
     Vector3 RDEPos;
 
+    Vector3 LIngPos;
+    Vector3 RIngPos;
+
     float test = 0.0f;
     bool first = false;
     // Start is called before the first frame update
     void Start()
     {
-
         Dopenclose = true;
         LDSPos = LDoor.transform.localPosition;
         RDSPos = RDoor.transform.localPosition;
@@ -41,8 +43,8 @@ public class DoorOpenClose : MonoBehaviour
                 test += Time.deltaTime;
             }
 
-            LDoor.transform.localPosition = Vector3.Lerp(LDSPos, LDEPos, test);
-            RDoor.transform.localPosition = Vector3.Lerp(RDSPos, RDEPos, test);
+            LDoor.transform.localPosition = Vector3.Lerp(LIngPos, LDEPos, test);
+            RDoor.transform.localPosition = Vector3.Lerp(RIngPos, RDEPos, test);
 
 
             Debug.Log(LDoor.transform.localPosition);
@@ -56,12 +58,15 @@ public class DoorOpenClose : MonoBehaviour
                 test += Time.deltaTime;
             }
 
-            LDoor.transform.localPosition = Vector3.Lerp(LDEPos, LDSPos, test);
-            RDoor.transform.localPosition = Vector3.Lerp(RDEPos, RDSPos, test);
+            LDoor.transform.localPosition = Vector3.Lerp(LIngPos, LDSPos, test);
+            RDoor.transform.localPosition = Vector3.Lerp(RIngPos, RDSPos, test);
 
             Debug.Log(LDoor.transform.localPosition);
             Debug.Log(RDoor.transform.localPosition);
         }
+
+        LIngPos = LDoor.transform.localPosition;
+        RIngPos = RDoor.transform.localPosition;
     }
     private void OnTriggerEnter(Collider other)
     {
