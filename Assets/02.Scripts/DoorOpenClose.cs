@@ -36,6 +36,9 @@ public class DoorOpenClose : MonoBehaviour
         if (!first)
             return;
 
+        LIngPos = LDoor.transform.localPosition;
+        RIngPos = RDoor.transform.localPosition;
+
         if (Dopenclose == true)
         {
             if (test <= 1.0f)
@@ -47,8 +50,8 @@ public class DoorOpenClose : MonoBehaviour
             RDoor.transform.localPosition = Vector3.Lerp(RIngPos, RDEPos, test);
 
 
-            Debug.Log(LDoor.transform.localPosition);
-            Debug.Log(RDoor.transform.localPosition);
+            //Debug.Log(LDoor.transform.localPosition);
+            //Debug.Log(RDoor.transform.localPosition);
         }
 
         if (Dopenclose == false)
@@ -61,12 +64,9 @@ public class DoorOpenClose : MonoBehaviour
             LDoor.transform.localPosition = Vector3.Lerp(LIngPos, LDSPos, test);
             RDoor.transform.localPosition = Vector3.Lerp(RIngPos, RDSPos, test);
 
-            Debug.Log(LDoor.transform.localPosition);
-            Debug.Log(RDoor.transform.localPosition);
+            //Debug.Log(LDoor.transform.localPosition);
+            //Debug.Log(RDoor.transform.localPosition);
         }
-
-        LIngPos = LDoor.transform.localPosition;
-        RIngPos = RDoor.transform.localPosition;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -77,7 +77,7 @@ public class DoorOpenClose : MonoBehaviour
             test = 0.0f;
 
         Dopenclose = true;
-        Debug.Log(Dopenclose);
+        //Debug.Log(Dopenclose);
     }
 
     private void OnTriggerExit(Collider other)
@@ -86,6 +86,6 @@ public class DoorOpenClose : MonoBehaviour
             test = 0.0f;
 
         Dopenclose = false;
-        Debug.Log(Dopenclose);
+        //Debug.Log(Dopenclose);
     }
 }
