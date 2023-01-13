@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2797880702738221732}
   m_Layer: 0
-  m_Name: RectUnit1 (2)
+  m_Name: RectUnit2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

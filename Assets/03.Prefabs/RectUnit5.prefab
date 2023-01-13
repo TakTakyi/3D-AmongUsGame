@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1914932055401670380}
   m_Layer: 0
-  m_Name: RectUnit1 (5)
+  m_Name: RectUnit5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
