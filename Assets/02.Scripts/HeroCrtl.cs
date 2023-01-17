@@ -1,6 +1,6 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 //enum AnimState
 //{
@@ -11,158 +11,77 @@
 //    talk
 //}
 
-//public class HeroCrtl : MonoBehaviour
-//{
-//    public Transform HeroBody;
-//    public Transform CameraArm;
+public class HeroCrtl : MonoBehaviour
+{
+    [SerializeField]
+    //이동속도
+    private float walkSpeed;
 
-//    AnimState m_AnimState = AnimState.Idle;
-//    public RuntimeAnimatorController[] m_Anim;//0-idle/1-walk/2-run/3-talk
-//    public Animator m_Animator;
+    [SerializeField]
+    //마우스 감도
+    private float lookSensitivity;
 
-//    bool isRun = false;
-//    bool isJump = false;
-//    float m_MoveSpeed = 5.0f;
-//    float jumptime = 0f;
+    [SerializeField]
+    //카메라 제한 각도
+    private float cameraRotationLimit;
+    private float currentCameraRotationX = 0;
 
-//    // Start is called before the first frame update
-//    void Start()
-//    {
-        
-//    }
+    [SerializeField]
+    //카메라 연결용
+    private Camera theCamera;
 
-//    // Update is called once per frame
-//    void Update()
-//    {
-//        animCtrl(m_AnimState);
-//        LookAround();
-//        MoveCtrl();
-//    }
+    //private Rigidbody myRigid;
+    public CharacterController characterController;
 
-//    void LookAround()
-//    {
-//        Vector2 mousePos = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-//        Vector3 CamAngle = CameraArm.rotation.eulerAngles;
+    // Start is called before the first frame update
+    void Start()
+    {
+        //myRigid = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
+    }
 
-//        //추가
-//        float x = CamAngle.x - mousePos.y;
-//        if (x < 180.0f)
-//        {
-//            x = Mathf.Clamp(x, -1f, 70f);
-//        }
-//        else
-//        {
-//            x = Mathf.Clamp(x, 335f, 361f);
-//        }
+    // Update is called once per frame
+    void Update()
+    {
+        Move();
+        CameraRotation();
+        CharacterRotation();
+    }
 
-//        CameraArm.rotation = Quaternion.Euler(x, CamAngle.y + mousePos.x, CamAngle.z);
-//    }
+    private void Move()
+    {
+        //플레이어가 움직는 값을 설정하기
+        float _moveDirX = Input.GetAxisRaw("Horizontal");
+        float _moveDriZ = Input.GetAxisRaw("Vertical");
 
-//    void MoveCtrl()
-//    {
-//        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-//        bool isMove = moveInput.magnitude != 0;
-//        jumptime -= Time.deltaTime;
+        Vector3 _moveHorizontal = transform.right * _moveDirX;
+        Vector3 _moveVertical = transform.forward * _moveDriZ;
 
+        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;
 
-//        if (Input.GetKey(KeyCode.LeftShift))
-//        {
-//            isRun = true;
-//        }
-//        else
-//        {
-//            isRun = false;
-//        }
+        //myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
 
-//        if (Input.GetKeyDown(KeyCode.Space)&& jumptime <= 0.0f)
-//        {
-//            jumptime = 1.03f;
-//            isJump = true;
-//        }
-//        else if(jumptime<= 0.0f)
-//        {
-//            m_Animator.applyRootMotion = false;
-//            isJump = false;
-//        }
+        characterController.Move(_velocity * Time.deltaTime);
+    }
 
+    private void CharacterRotation()
+    {
+        //캐릭터를 좌우로 움직이기
+        float _yRotation = Input.GetAxisRaw("Mouse X");
+        Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * lookSensitivity;
+        //myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotationY));
+        this.transform.Rotate(_characterRotationY * Time.deltaTime * lookSensitivity, Space.Self);
+    }
 
-//        if (isMove && isRun == false)
-//        {
-//            Move(moveInput, m_MoveSpeed);
-//            if(isJump == false)
-//            {
-//                m_AnimState = AnimState.walk;
-//            }
-//            else
-//            {
-//                Jump();
-//            }
-//        }
-//        else if (isMove && isRun == true)
-//        {
-//            Move(moveInput, m_MoveSpeed * 2);
-//            if (isJump == false)
-//            {
-//                m_AnimState = AnimState.run;
-//            }
-//            else
-//            {
-//                Jump();
-//            }
-//        }
-//        else
-//        {
-//            if (isJump == false)
-//            {
-//                m_AnimState = AnimState.Idle;
-//            }
-//            else
-//            {
-//                Jump();
-//            }
-//        }
+    private void CameraRotation()
+    {
 
-//        //Debug.DrawRay(CameraArm.position, 
-//        //    new Vector3(CameraArm.forward.x, 0f, CameraArm.forward.z).normalized
-//        //    , Color.red);
-//    }
-//    void Jump()
-//    {
-//        m_Animator.applyRootMotion = true;
-//        m_AnimState = AnimState.Jump;
-//    }
+        //카메라 상하로 움직이기
+        float _xRotation = Input.GetAxisRaw("Mouse Y");
+        float _cameraRotationX = _xRotation * lookSensitivity;
+        currentCameraRotationX -= _cameraRotationX;
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
-//    void Move(Vector2 moveInput, float a_MoveSpeed)
-//    {
-//        Vector3 lookForward = new Vector3(CameraArm.forward.x, 0f, CameraArm.forward.z).normalized;
-//        Vector3 lookRight = new Vector3(CameraArm.right.x, 0f, CameraArm.right.z).normalized;
-//        Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
-
-//        HeroBody.forward = moveDir;
-//        transform.position += moveDir * Time.deltaTime * a_MoveSpeed;
-//    }
-
-//    void animCtrl(AnimState AnimType)
-//    {
-//        if (AnimType == AnimState.Idle)
-//        {
-//            m_Animator.runtimeAnimatorController = m_Anim[0];
-//        }
-//        else if (AnimType == AnimState.walk)
-//        {
-//            m_Animator.runtimeAnimatorController = m_Anim[1];
-//        }
-//        else if (AnimType == AnimState.run)
-//        {
-//            m_Animator.runtimeAnimatorController = m_Anim[2];
-//        }
-//        else if (AnimType == AnimState.Jump)
-//        {
-//            m_Animator.runtimeAnimatorController = m_Anim[3];
-//        }
-//        else if (AnimType == AnimState.talk)
-//        {
-//            m_Animator.runtimeAnimatorController = m_Anim[4];
-//        }
-//    }
-//}
+        theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+    }
+}
