@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum AnimState
-{
-    Idle,
-    walk,
-    talk
-}
+//enum AnimState
+//{
+//    Idle,
+//    walk,
+//    talk
+//}
 
 public class PlayerCtrl : MonoBehaviour
 {
