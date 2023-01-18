@@ -28,14 +28,19 @@ public class HeroCrtl : MonoBehaviour
     //카메라 연결용
     private Camera theCamera;
 
-    //private Rigidbody myRigid;
+    //캐릭터 컨트롤러 변수
     public CharacterController characterController;
-
+    //캐릭터의 이동 체크용 불형 변수
     bool isMove = false;
-
+    //애니메이션 적용 변수
     AnimState m_AnimState = AnimState.Idle;
     public RuntimeAnimatorController[] m_Anim;//0-idle/1-walk/2-talk
     public Animator m_Animator;
+
+    //레이캐스트 테스트
+    private RaycastHit m_RayHit;
+    private Ray m_Ray;
+    private float m_RayDist = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -48,10 +53,12 @@ public class HeroCrtl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animCtrl(m_AnimState); //애니메이션
-        Move();
-        CameraRotation();
-        CharacterRotation();
+        animCtrl(m_AnimState); //애니메이션 적용 함수
+        Move();                //캐릭터 이동 함수
+        CameraRotation();      //카메라 좌우 움직이기
+        CharacterRotation();   //카메라 상하 움직이기
+
+        //CameraRayFunc(); //카메라에서 레이 쏴서 쿼스트 및 시체 탐지 및 임포스터 살인 구현함수
     }
 
     private void Move()
@@ -116,6 +123,23 @@ public class HeroCrtl : MonoBehaviour
         else if (AnimType == AnimState.talk)
         {
             m_Animator.runtimeAnimatorController = m_Anim[2];
+        }
+    }
+
+    void CameraRayFunc()
+    {
+        //화면 가운데 광선 쏘기
+        m_Ray = theCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+        if (Physics.Raycast(m_Ray, out m_RayHit, m_RayDist))
+        {
+            //Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.green);
+            //Debug.DrawLine(m_Ray.origin, m_RayHit.point, Color.green);
+            //Debug.Log("이름 + " + m_RayHit.transform.name);
+        }
+        else
+        {
+            Debug.DrawLine(m_Ray.origin, m_Ray.direction, Color.red);
         }
     }
 }
