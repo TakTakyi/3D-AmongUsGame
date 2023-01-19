@@ -25,6 +25,7 @@ public class Shield_Quest : MonoBehaviour
             for (int ii = 0; ii < m_ShieldRender.Length; ii++)
             {
                 m_ShieldRender[ii].material.SetColor("_EmissionColor", m_Color * 0.1f);
+                gameObject.GetComponent<Outline>().enabled = false;
                 Debug.Log("변경 성공");
             }
 
