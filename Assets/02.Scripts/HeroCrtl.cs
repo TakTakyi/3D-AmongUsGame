@@ -41,6 +41,7 @@ public class HeroCrtl : MonoBehaviour
     private RaycastHit m_RayHit;
     private Ray m_Ray;
     private float m_RayDist = 5.0f;
+    public LayerMask m_QuestLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +59,7 @@ public class HeroCrtl : MonoBehaviour
         CameraRotation();      //카메라 좌우 움직이기
         CharacterRotation();   //카메라 상하 움직이기
 
-        //CameraRayFunc(); //카메라에서 레이 쏴서 쿼스트 및 시체 탐지 및 임포스터 살인 구현함수
+        CameraRayFunc(); //카메라에서 레이 쏴서 쿼스트 및 시체 탐지 및 임포스터 살인 구현함수
     }
 
     private void Move()
@@ -131,15 +132,15 @@ public class HeroCrtl : MonoBehaviour
         //화면 가운데 광선 쏘기
         m_Ray = theCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
-        if (Physics.Raycast(m_Ray, out m_RayHit, m_RayDist))
+        if (Physics.Raycast(m_Ray, out m_RayHit, m_RayDist, m_QuestLayer))
         {
-            //Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.green);
+            Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.green);
             //Debug.DrawLine(m_Ray.origin, m_RayHit.point, Color.green);
-            //Debug.Log("이름 + " + m_RayHit.transform.name);
+            Debug.Log("이름 + " + m_RayHit.transform.name);
         }
         else
         {
-            Debug.DrawLine(m_Ray.origin, m_Ray.direction, Color.red);
+            Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.red);
         }
     }
 }
