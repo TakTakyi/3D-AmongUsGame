@@ -39,6 +39,7 @@ public class HeroCrtl : MonoBehaviour
 
     //레이캐스트 테스트
     private RaycastHit m_RayHit;
+    private bool m_RayCheckHit;
     private Ray m_Ray;
     private float m_RayDist = 5.0f;
     public LayerMask m_QuestLayer;
@@ -131,16 +132,25 @@ public class HeroCrtl : MonoBehaviour
     {
         //화면 가운데 광선 쏘기
         m_Ray = theCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        m_RayCheckHit = Physics.Raycast(m_Ray, out m_RayHit, m_RayDist, m_QuestLayer);
 
-        if (Physics.Raycast(m_Ray, out m_RayHit, m_RayDist, m_QuestLayer))
+        if (m_RayCheckHit)
         {
             Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.green);
             //Debug.DrawLine(m_Ray.origin, m_RayHit.point, Color.green);
             Debug.Log("이름 + " + m_RayHit.transform.name);
+            m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(true);
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().QuestComp();
+                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(false);
+            }
         }
         else
         {
             Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.red);
+            //m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCV = false;
         }
     }
 }
