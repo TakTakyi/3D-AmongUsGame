@@ -25,7 +25,7 @@ public class QuestObjects : MonoBehaviour
     }
 
     public virtual void OnOffCanvas(bool OnOff)
-    {
+    {   //키설명용 UI OnOff 함수
         if (OnOff == true)
         {
             m_Canvas.SetActive(true);
@@ -34,5 +34,10 @@ public class QuestObjects : MonoBehaviour
         {
             m_Canvas.SetActive(false);
         }
+    }
+
+    public virtual void OnOffQuestCanvas()
+    {   //실직적인 퀘스트를 수행하는 UI
+
     }
 }
