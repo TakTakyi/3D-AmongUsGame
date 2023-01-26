@@ -152,12 +152,21 @@ public class HeroCrtl : MonoBehaviour
             Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.green);
             //Debug.DrawLine(m_Ray.origin, m_RayHit.point, Color.green);
             Debug.Log("이름 + " + m_RayHit.transform.name);
-            m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(true);
+
+            if (m_RayHit.collider.gameObject.GetComponent<QuestObjects>().Quest_Available == true)
+            {
+                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(true);
+            }
+            else
+            {
+                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(false);
+                m_PState = PlayerState.Move;
+            }
+
 
             if (Input.GetKeyDown(KeyCode.F))
             {
                 m_PState = PlayerState.Questing;
-                //m_RayHit.collider.gameObject.GetComponent<QuestObjects>().QuestComp();
                 m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffQuestCanvas();
             }
         }

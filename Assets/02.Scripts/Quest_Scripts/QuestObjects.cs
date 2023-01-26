@@ -5,7 +5,7 @@ using UnityEngine;
 public class QuestObjects : MonoBehaviour
 {
     public GameObject m_Canvas;
-    //public bool OnOffCV = false;
+    public bool Quest_Available;
 
     // Start is called before the first frame update
     void Start()

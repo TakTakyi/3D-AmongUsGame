@@ -17,18 +17,43 @@ public class Shield_Quest : QuestObjects
     void Start()
     {
         m_Canvas.SetActive(false);
+        RandomColor();
         for (int ii = 0; ii < m_Shield.Length; ii++)
         {
             m_ShieldRender[ii] = m_Shield[ii].GetComponent<MeshRenderer>();
         }
 
         ShieldQuest();
+        Quest_Available = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        //Debug.Log(Quest_Available);
+
+        if (m_ShQuest.activeSelf == true)
+        {
+            if (JudgeComp() == true)
+            {
+                QuestComp();
+            }
+        }
+    }
+
+    //판정 함수 
+    public bool JudgeComp()
+    {
+        for (int ii = 0; ii < m_Btn.Length; ii++)
+        {
+            if (m_Btn[ii].image.color != Color.white)
+            {
+                return false;
+            }
+            else
+                continue;
+        }
+        return true;
     }
 
     public override void QuestComp()
@@ -37,11 +62,13 @@ public class Shield_Quest : QuestObjects
         {
             m_ShieldRender[ii].material.SetColor("_EmissionColor", m_Color * 0.1f);
             gameObject.GetComponent<Outline>().enabled = false;
+            gameObject.GetComponentInChildren<Monitor>().on = true;
             Debug.Log("변경 성공");
         }
 
         m_ShQuest.SetActive(false);
-        
+        OnOffCanvas(false);
+        Quest_Available = false;
     }
 
     public override void OnOffCanvas(bool OnOff)
@@ -52,14 +79,6 @@ public class Shield_Quest : QuestObjects
     public override void OnOffQuestCanvas()
     {
         m_ShQuest.SetActive(true);
-
-        for (int ii = 0; ii < m_Btn.Length; ii++)
-        {
-            if (m_Btn[ii].image.color == Color.white)
-            {
-                QuestComp();
-            }
-        }
     }
 
     void ShieldQuest()
@@ -68,7 +87,14 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[0].onClick.AddListener(() =>
             {
-                m_Btn[0].image.color = Color.white;
+                if (m_Btn[0].image.color == Color.white)
+                {
+                    m_Btn[0].image.color = Color.red;
+                }
+                else if (m_Btn[0].image.color == Color.red)
+                {
+                    m_Btn[0].image.color = Color.white;
+                }
             });
         }
 
@@ -76,7 +102,14 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[1].onClick.AddListener(() =>
             {
-                m_Btn[1].image.color = Color.white;
+                if (m_Btn[1].image.color == Color.white)
+                {
+                    m_Btn[1].image.color = Color.red;
+                }
+                else if (m_Btn[1].image.color == Color.red)
+                {
+                    m_Btn[1].image.color = Color.white;
+                }
             });
         }
 
@@ -84,7 +117,14 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[2].onClick.AddListener(() =>
             {
-                m_Btn[2].image.color = Color.white;
+                if (m_Btn[2].image.color == Color.white)
+                {
+                    m_Btn[2].image.color = Color.red;
+                }
+                else if (m_Btn[2].image.color == Color.red)
+                {
+                    m_Btn[2].image.color = Color.white;
+                }
             });
         }
 
@@ -92,7 +132,14 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[3].onClick.AddListener(() =>
             {
-                m_Btn[3].image.color = Color.white;
+                if (m_Btn[3].image.color == Color.white)
+                {
+                    m_Btn[3].image.color = Color.red;
+                }
+                else if (m_Btn[3].image.color == Color.red)
+                {
+                    m_Btn[3].image.color = Color.white;
+                }
             });
         }
 
@@ -100,7 +147,14 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[4].onClick.AddListener(() =>
             {
-                m_Btn[4].image.color = Color.white;
+                if (m_Btn[4].image.color == Color.white)
+                {
+                    m_Btn[4].image.color = Color.red;
+                }
+                else if (m_Btn[4].image.color == Color.red)
+                {
+                    m_Btn[4].image.color = Color.white;
+                }
             });
         }
 
@@ -108,7 +162,14 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[5].onClick.AddListener(() =>
             {
-                m_Btn[5].image.color = Color.white;
+                if (m_Btn[5].image.color == Color.white)
+                {
+                    m_Btn[5].image.color = Color.red;
+                }
+                else if (m_Btn[5].image.color == Color.red)
+                {
+                    m_Btn[5].image.color = Color.white;
+                }
             });
         }
 
@@ -116,7 +177,14 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[6].onClick.AddListener(() =>
             {
-                m_Btn[6].image.color = Color.white;
+                if (m_Btn[6].image.color == Color.white)
+                {
+                    m_Btn[6].image.color = Color.red;
+                }
+                else if (m_Btn[6].image.color == Color.red)
+                {
+                    m_Btn[6].image.color = Color.white;
+                }
             });
         }
 
@@ -124,7 +192,14 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[7].onClick.AddListener(() =>
             {
-                m_Btn[7].image.color = Color.white;
+                if (m_Btn[7].image.color == Color.white)
+                {
+                    m_Btn[7].image.color = Color.red;
+                }
+                else if (m_Btn[7].image.color == Color.red)
+                {
+                    m_Btn[7].image.color = Color.white;
+                }
             });
         }
 
@@ -132,8 +207,32 @@ public class Shield_Quest : QuestObjects
         {
             m_Btn[8].onClick.AddListener(() =>
             {
-                m_Btn[8].image.color = Color.white;
+                if (m_Btn[8].image.color == Color.white)
+                {
+                    m_Btn[8].image.color = Color.red;
+                }
+                else if (m_Btn[8].image.color == Color.red)
+                {
+                    m_Btn[8].image.color = Color.white;
+                }
             });
         }
     }
+
+    //랜덤하게 색 컨트롤
+    void RandomColor()
+    {
+        //int idx = Random.Range(0, 2);
+        //m_Btn[idx].image.color = Color.red;
+
+        for (int ii = 0; ii < m_Btn.Length; ii++)
+        {
+            int idx = Random.Range(0, 2);
+            if (idx == 1)
+            {
+                m_Btn[ii].image.color = Color.red;
+            }
+        }
+    }
+    
 }
