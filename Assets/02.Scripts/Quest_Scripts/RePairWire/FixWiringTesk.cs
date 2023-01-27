@@ -11,8 +11,10 @@ public enum EWireColor
     Magenta
 }
 
-public class FixWiringTesk : MonoBehaviour
+public class FixWiringTesk : QuestObjects
 {
+    public GameObject m_ShQuest;
+
     [SerializeField]
     private List<LeftWire> mLeftWires;
 
@@ -58,13 +60,14 @@ public class FixWiringTesk : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    //void Start()
-    //{
+    //Start is called before the first frame update
+    void Start()
+    {
+        m_Canvas.SetActive(false);
+        Quest_Available = true;
+    }
 
-    //}
-
-    // Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -131,6 +134,25 @@ public class FixWiringTesk : MonoBehaviour
         {
             //Close();
             Debug.Log("미션성공");
+            QuestComp();
         }
+    }
+
+    public override void QuestComp()
+    {
+        gameObject.GetComponent<Outline>().enabled = false;
+        m_ShQuest.SetActive(false);
+        OnOffCanvas(false);
+        Quest_Available = false;
+    }
+
+    public override void OnOffCanvas(bool OnOff)
+    {
+        base.OnOffCanvas(OnOff);
+    }
+
+    public override void OnOffQuestCanvas()
+    {
+        m_ShQuest.SetActive(true);
     }
 }

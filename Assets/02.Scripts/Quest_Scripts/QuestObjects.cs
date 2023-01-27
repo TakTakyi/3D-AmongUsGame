@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class QuestObjects : MonoBehaviour
 {
+    // 모든 퀘스트 스크립트가 상속 받을 상위 스크립트
+
     public GameObject m_Canvas;
     public bool Quest_Available;
 
