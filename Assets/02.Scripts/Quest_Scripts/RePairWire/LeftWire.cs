@@ -23,7 +23,7 @@ public class LeftWire : MonoBehaviour
 
     //private LeftWire mSelectedwire;
 
-    [SerializeField]
+    //[SerializeField]
     //private float offset = 15f;
 
     private Canvas mGameCanvas;
