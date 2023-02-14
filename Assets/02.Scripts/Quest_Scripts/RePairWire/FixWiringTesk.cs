@@ -11,8 +11,10 @@ public enum EWireColor
     Magenta
 }
 
-public class FixWiringTesk : MonoBehaviour
-{
+public class FixWiringTesk : QuestObjects
+{ 
+
+
     [SerializeField]
     private List<LeftWire> mLeftWires;
 
