@@ -10,7 +10,6 @@ public class Shield_Quest : QuestObjects
     Color m_Color = new Color(0.0f, 191.0f, 191.0f);
 
     //퀘스트 수행하기 위한 UI 변수
-    public GameObject m_ShQuest;
     public Button[] m_Btn;
 
     // Start is called before the first frame update
@@ -25,6 +24,11 @@ public class Shield_Quest : QuestObjects
 
         ShieldQuest();
         Quest_Available = true;
+
+        if (m_ClostBtn != null)
+        {
+            m_ClostBtn.onClick.AddListener(CloseBtnFunc);
+        }
     }
 
     // Update is called once per frame
@@ -32,7 +36,7 @@ public class Shield_Quest : QuestObjects
     {
         //Debug.Log(Quest_Available);
 
-        if (m_ShQuest.activeSelf == true)
+        if (m_QuestCanvas.activeSelf == true)
         {
             if (JudgeComp() == true)
             {
@@ -66,7 +70,7 @@ public class Shield_Quest : QuestObjects
             Debug.Log("변경 성공");
         }
 
-        m_ShQuest.SetActive(false);
+        OnOffQuestCanvas(false);
         OnOffCanvas(false);
         Quest_Available = false;
     }
@@ -76,9 +80,9 @@ public class Shield_Quest : QuestObjects
         base.OnOffCanvas(OnOff);
     }
 
-    public override void OnOffQuestCanvas()
+    public override void OnOffQuestCanvas(bool OnOff)
     {
-        m_ShQuest.SetActive(true);
+        base.OnOffQuestCanvas(OnOff);
     }
 
     void ShieldQuest()
@@ -234,5 +238,9 @@ public class Shield_Quest : QuestObjects
             }
         }
     }
-    
+
+    public override void CloseBtnFunc()
+    {
+        base.CloseBtnFunc();
+    }
 }

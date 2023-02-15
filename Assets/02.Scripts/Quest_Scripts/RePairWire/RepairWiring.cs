@@ -31,7 +31,7 @@ public class RepairWiring : QuestObjects
         base.OnOffCanvas(OnOff);
     }
 
-    public override void OnOffQuestCanvas()
+    public override void OnOffQuestCanvas(bool OnOff)
     {
         m_ShQuest.SetActive(true);
     }

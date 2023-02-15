@@ -167,7 +167,12 @@ public class HeroCrtl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 m_PState = PlayerState.Questing;
-                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffQuestCanvas();
+                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffQuestCanvas(true);
+            }
+
+            if (m_RayHit.collider.gameObject.GetComponent<QuestObjects>().m_QuestCanvas.activeSelf == false)
+            {
+                m_PState = PlayerState.Move;
             }
         }
         else

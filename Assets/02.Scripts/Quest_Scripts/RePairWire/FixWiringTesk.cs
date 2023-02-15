@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum EWireColor
 {
@@ -12,9 +13,7 @@ public enum EWireColor
 }
 
 public class FixWiringTesk : QuestObjects
-{ 
-
-
+{
     [SerializeField]
     private List<LeftWire> mLeftWires;
 
@@ -25,11 +24,7 @@ public class FixWiringTesk : QuestObjects
 
     private void OnEnable()
     {
-        for (int ii = 0; ii < mLeftWires.Count; ii++)
-        {
-            mLeftWires[ii].ResetTarget();
-            mLeftWires[ii].DisconnectWire();
-        }
+        ResetWire();
 
         List<int> numberPool = new List<int>();
 
@@ -61,10 +56,16 @@ public class FixWiringTesk : QuestObjects
     }
 
     // Start is called before the first frame update
-    //void Start()
-    //{
+    void Start()
+    {
+        m_Canvas.SetActive(false);
+        Quest_Available = true;
 
-    //}
+        if (m_ClostBtn != null)
+        {
+            m_ClostBtn.onClick.AddListener(CloseBtnFunc);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -117,8 +118,17 @@ public class FixWiringTesk : QuestObjects
         }
     }
 
-    private void CheckCompleteTask()
+    void ResetWire() //전선 상태 초기화
     {
+        for (int ii = 0; ii < mLeftWires.Count; ii++)
+        {
+            mLeftWires[ii].ResetTarget();
+            mLeftWires[ii].DisconnectWire();
+        }
+    }
+
+    private void CheckCompleteTask()
+    {//전선이 다 연결되었는지 확인하는 함수
         bool isAllComplete = true;
         foreach (var wire in mLeftWires)
         {
@@ -131,8 +141,32 @@ public class FixWiringTesk : QuestObjects
 
         if (isAllComplete)
         {
-            //Close();
             Debug.Log("미션성공");
+            QuestComp();
         }
+    }
+
+    public override void QuestComp()
+    {
+        gameObject.GetComponent<Outline>().enabled = false;
+        OnOffQuestCanvas(false);
+        OnOffCanvas(false);
+        Quest_Available = false;
+    }
+
+    public override void OnOffCanvas(bool OnOff)
+    {
+        base.OnOffCanvas(OnOff);
+    }
+
+    public override void OnOffQuestCanvas(bool OnOff)
+    {
+        base.OnOffQuestCanvas(OnOff);
+    }
+
+    public override void CloseBtnFunc()
+    {
+        OnOffQuestCanvas(false);
+        ResetWire();
     }
 }
