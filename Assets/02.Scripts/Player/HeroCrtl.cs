@@ -19,6 +19,11 @@ public enum PlayerState
 
 public class HeroCrtl : MonoBehaviour
 {
+    [Header("----- UI변수 -----")]
+    public GameObject m_InfoKey;
+    public Text m_InfoKeyText;
+
+    [Header("----- 캐릭터 이동 변수 -----")]
     [SerializeField]
     //이동속도
     private float walkSpeed;
