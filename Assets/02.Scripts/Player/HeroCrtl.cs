@@ -62,6 +62,9 @@ public class HeroCrtl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //UI
+        m_InfoKey.SetActive(false);
+
         //myRigid = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
         m_Animator = GetComponent<Animator>();
@@ -161,10 +164,12 @@ public class HeroCrtl : MonoBehaviour
             if (m_RayHit.collider.gameObject.GetComponent<QuestObjects>().Quest_Available == true)
             {
                 m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(true);
+                m_InfoKey.SetActive(true);
             }
             else
             {
                 m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(false);
+                m_InfoKey.SetActive(false);
                 m_PState = PlayerState.Move;
             }
 
@@ -183,7 +188,8 @@ public class HeroCrtl : MonoBehaviour
         else
         {
             Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.red);
-            //m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCV = false;
+            m_InfoKey.SetActive(false);
+            //m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(false);
         }
     }
 }
