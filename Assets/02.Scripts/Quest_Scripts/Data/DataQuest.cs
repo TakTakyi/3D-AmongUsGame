@@ -78,7 +78,7 @@ public class DataQuest : QuestObjects
         if (m_ProImg.fillAmount >= 1.0f)
         {
             m_TimeText.text = "다운로드 완료";
-            m_QuestCanvas.SetActive(false);
+            QuestComp();
         }
 
         if (m_ChaImg.gameObject.activeSelf == true)
@@ -112,7 +112,10 @@ public class DataQuest : QuestObjects
 
     public override void QuestComp()
     {
-        base.QuestComp();
+        gameObject.GetComponent<Outline>().enabled = false;
+        OnOffQuestCanvas(false);
+        OnOffCanvas(false);
+        Quest_Available = false;
     }
 
     public override void OnOffCanvas(bool OnOff)
