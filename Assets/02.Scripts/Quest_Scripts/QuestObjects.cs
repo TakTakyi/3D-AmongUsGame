@@ -7,7 +7,7 @@ public class QuestObjects : MonoBehaviour
 {
     // 모든 퀘스트 스크립트가 상속 받을 상위 스크립트
 
-    public GameObject m_Canvas;  //키설명 보이는 캔버스
+    public GameObject m_UseUICanvas;  //키설명 보이는 캔버스
     public bool Quest_Available; //퀘스트 수행가능 불형변수
     public GameObject m_QuestCanvas; //퀘스트를 수행하는 캔버스 변수
 
@@ -17,7 +17,7 @@ public class QuestObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_Canvas.SetActive(false);
+        m_UseUICanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,15 +31,15 @@ public class QuestObjects : MonoBehaviour
 
     }
 
-    public virtual void OnOffCanvas(bool OnOff)
+    public virtual void OnOffUICanvas(bool OnOff)
     {   //키설명용 UI OnOff 함수
         if (OnOff == true)
         {
-            m_Canvas.SetActive(true);
+            m_UseUICanvas.SetActive(true);
         }
         else
         {
-            m_Canvas.SetActive(false);
+            m_UseUICanvas.SetActive(false);
         }
     }
 

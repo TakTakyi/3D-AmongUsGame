@@ -20,6 +20,7 @@ public class FixWiringTesk : QuestObjects
     [SerializeField]
     private List<RightWire> mRightWires;
 
+    public Canvas m_Quest;
     private LeftWire mSelectedWire;
 
     private void OnEnable()
@@ -58,7 +59,7 @@ public class FixWiringTesk : QuestObjects
     // Start is called before the first frame update
     void Start()
     {
-        m_Canvas.SetActive(false);
+        m_UseUICanvas.SetActive(false);
         Quest_Available = true;
 
         if (m_ClostBtn != null)
@@ -150,13 +151,13 @@ public class FixWiringTesk : QuestObjects
     {
         gameObject.GetComponent<Outline>().enabled = false;
         OnOffQuestCanvas(false);
-        OnOffCanvas(false);
+        OnOffUICanvas(false);
         Quest_Available = false;
     }
 
-    public override void OnOffCanvas(bool OnOff)
+    public override void OnOffUICanvas(bool OnOff)
     {
-        base.OnOffCanvas(OnOff);
+        base.OnOffUICanvas(OnOff);
     }
 
     public override void OnOffQuestCanvas(bool OnOff)

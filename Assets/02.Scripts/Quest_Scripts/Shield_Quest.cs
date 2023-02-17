@@ -15,7 +15,7 @@ public class Shield_Quest : QuestObjects
     // Start is called before the first frame update
     void Start()
     {
-        m_Canvas.SetActive(false);
+        m_UseUICanvas.SetActive(false);
         RandomColor();
         for (int ii = 0; ii < m_Shield.Length; ii++)
         {
@@ -71,13 +71,13 @@ public class Shield_Quest : QuestObjects
         }
 
         OnOffQuestCanvas(false);
-        OnOffCanvas(false);
+        OnOffUICanvas(false);
         Quest_Available = false;
     }
 
-    public override void OnOffCanvas(bool OnOff)
+    public override void OnOffUICanvas(bool OnOff)
     {
-        base.OnOffCanvas(OnOff);
+        base.OnOffUICanvas(OnOff);
     }
 
     public override void OnOffQuestCanvas(bool OnOff)

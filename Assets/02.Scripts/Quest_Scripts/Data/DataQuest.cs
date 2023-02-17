@@ -28,7 +28,7 @@ public class DataQuest : QuestObjects
     // Start is called before the first frame update
     void Start()
     {
-        m_Canvas.SetActive(false);
+        m_UseUICanvas.SetActive(false);
         Quest_Available = true;
 
         m_ProImg.fillAmount = 0;
@@ -78,7 +78,11 @@ public class DataQuest : QuestObjects
         if (m_ProImg.fillAmount >= 1.0f)
         {
             m_TimeText.text = "다운로드 완료";
-            QuestComp();
+            
+            if (m_ChaImg.rectTransform.anchoredPosition.x >= 155.0f)
+            {
+                QuestComp();
+            }
         }
 
         if (m_ChaImg.gameObject.activeSelf == true)
@@ -114,13 +118,13 @@ public class DataQuest : QuestObjects
     {
         gameObject.GetComponent<Outline>().enabled = false;
         OnOffQuestCanvas(false);
-        OnOffCanvas(false);
+        OnOffUICanvas(false);
         Quest_Available = false;
     }
 
-    public override void OnOffCanvas(bool OnOff)
+    public override void OnOffUICanvas(bool OnOff)
     {
-        base.OnOffCanvas(OnOff);
+        base.OnOffUICanvas(OnOff);
     }
 
     public override void OnOffQuestCanvas(bool OnOff)

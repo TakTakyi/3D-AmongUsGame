@@ -20,6 +20,7 @@ public enum PlayerState
 public class HeroCrtl : MonoBehaviour
 {
     [Header("----- UI변수 -----")]
+    public GameObject m_PlayerUI;
     public GameObject m_InfoKey;
     public Text m_InfoKeyText;
 
@@ -99,6 +100,12 @@ public class HeroCrtl : MonoBehaviour
 
         Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;
 
+        if (this.gameObject.transform.position.y >= 0.3f)
+        {
+            Debug.Log(_velocity.y);
+            _velocity.y = 0.1f;
+        }
+
         //myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
 
         if (isMove == false)
@@ -123,7 +130,6 @@ public class HeroCrtl : MonoBehaviour
 
     private void CameraRotation()
     {
-
         //카메라 상하로 움직이기
         float _xRotation = Input.GetAxisRaw("Mouse Y");
         float _cameraRotationX = _xRotation * lookSensitivity;
@@ -163,12 +169,12 @@ public class HeroCrtl : MonoBehaviour
 
             if (m_RayHit.collider.gameObject.GetComponent<QuestObjects>().Quest_Available == true)
             {
-                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(true);
+                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffUICanvas(true);
                 m_InfoKey.SetActive(true);
             }
             else
             {
-                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(false);
+                m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffUICanvas(false);
                 m_InfoKey.SetActive(false);
                 m_PState = PlayerState.Move;
             }
@@ -177,11 +183,14 @@ public class HeroCrtl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 m_PState = PlayerState.Questing;
+                m_PlayerUI.SetActive(false);
                 m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffQuestCanvas(true);
+
             }
 
             if (m_RayHit.collider.gameObject.GetComponent<QuestObjects>().m_QuestCanvas.activeSelf == false)
             {
+                m_PlayerUI.SetActive(true);
                 m_PState = PlayerState.Move;
             }
         }

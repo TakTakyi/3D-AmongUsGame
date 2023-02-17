@@ -30,8 +30,9 @@ public class LeftWire : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        mGameCanvas = FindObjectOfType<Canvas>();
+    { 
+        mGameCanvas = this.GetComponentInParent<FixWiringTesk>().m_Quest; //FindObjectOfType<Canvas>();
+        //Debug.Log(mGameCanvas.name);
     }
 
     // Update is called once per frame
