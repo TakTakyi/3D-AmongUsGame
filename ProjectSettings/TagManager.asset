@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CCTVCam
+  - Task-Wire
+  - Leave
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Quest
-  - 
+  - Leave
   - 
   - 
   - 
