@@ -21,16 +21,18 @@ public class ClaerOxygenFilter : QuestObjects
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            int layerMask = 1 << LayerMask.NameToLayer("Leave");
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-            {
-                Debug.Log(hit.collider.name);
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Debug.Log(Input.mousePosition);
+
+        //    //int layerMask = 1 << LayerMask.NameToLayer("Leave");
+        //    //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    //RaycastHit hit;
+        //    //if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        //    //{
+        //    //    Debug.Log(hit.collider.name);
+        //    //}
+        //}
     }
 
     public override void QuestComp()
