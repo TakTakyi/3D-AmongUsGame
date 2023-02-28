@@ -10,7 +10,9 @@ public class SlotScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        int xPos = Random.Range(-120, 240);
+        int yPos = Random.Range(-230, 230);
+        ItemImg.rectTransform.anchoredPosition = new Vector2(xPos, yPos);
     }
 
     // Update is called once per frame
@@ -18,4 +20,14 @@ public class SlotScript : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "TrashHoll")
+        {
+            ItemImg.gameObject.SetActive(false);
+        }
+    }
+
+    
 }
