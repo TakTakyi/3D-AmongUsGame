@@ -79,7 +79,7 @@ public class HeroCrtl : MonoBehaviour
             animCtrl(m_AnimState); //애니메이션 적용 함수
             Move();                //캐릭터 이동 함수
             CameraRotation();      //카메라 좌우 움직이기
-            CharacterRotation();   //카메라 상하 움직이기
+            CharacterRotation();   //캐릭터 회전 함수
         }
 
         CameraRayFunc(); //카메라에서 레이 쏴서 쿼스트 및 시체 탐지 및 임포스터 살인 구현함수
@@ -100,13 +100,12 @@ public class HeroCrtl : MonoBehaviour
 
         Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;
 
-        if (this.gameObject.transform.position.y >= 0.3f)
+        if (this.gameObject.transform.position.y >= 0.1f)
         {
             Debug.Log(_velocity.y);
-            _velocity.y = 0.1f;
+            Debug.Log(this.gameObject.transform.position.y);
+            _velocity.y = 0.0f;
         }
-
-        //myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
 
         if (isMove == false)
         {
@@ -198,7 +197,6 @@ public class HeroCrtl : MonoBehaviour
         {
             Debug.DrawRay(m_Ray.origin, theCamera.transform.forward * m_RayDist, Color.red);
             m_InfoKey.SetActive(false);
-            //m_RayHit.collider.gameObject.GetComponent<QuestObjects>().OnOffCanvas(false);
         }
     }
 }
