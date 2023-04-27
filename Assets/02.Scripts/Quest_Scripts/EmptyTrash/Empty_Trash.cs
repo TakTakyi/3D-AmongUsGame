@@ -8,8 +8,8 @@ public class Empty_Trash : QuestObjects
     public GameObject m_BoxCol;   //콜리더 isTrigger 접근 변수
     public Button m_EmBtn;        //쓰레기 버리는 버튼
 
-    public GameObject[] m_TrashOBJ;     //성공여부를 판단하기위해 배열 선언
-    private GameObject[] m_TrashPos = new GameObject[20];    //쓰레기 기존 위치 저장용 변수
+    public Image[] m_TrashOBJ;     //성공여부를 판단하기위해 배열 선언
+    private Vector2[] m_TrashPos = new Vector2[20];    //쓰레기 기존 위치 저장용 변수
 
     //흔들리는 모션을 위한 변수
     public GameObject m_TotalPanel;
@@ -23,9 +23,10 @@ public class Empty_Trash : QuestObjects
     // Start is called before the first frame update
     void Start()
     {
+        //쓰레기들의 초기위치 저장
         for (int ii = 0; ii < m_TrashOBJ.Length; ii++)
         {
-            m_TrashPos[ii].transform.position = m_TrashOBJ[ii].transform.position; //초기위치 저장
+            m_TrashPos[ii] = m_TrashOBJ[ii].rectTransform.anchoredPosition;
         }
 
         Quest_Available = true;
@@ -59,11 +60,10 @@ public class Empty_Trash : QuestObjects
             QuestComp();
         }
 
-        for (int ii = 0; ii < m_TrashPos.Length; ii++)
-        {
-            RectTransform a_Rect = m_TrashPos[ii].GetComponent<RectTransform>();
-            Debug.Log(a_Rect.anchoredPosition);
-        }
+        //for (int ii = 0; ii < m_TrashPos.Length; ii++)
+        //{
+        //    Debug.Log(m_TrashPos[ii].x + " + " + m_TrashPos[ii].y);
+        //} 로그 찍기
     }
 
     IEnumerator Shake(float duration) //흔들기 함수
@@ -123,7 +123,7 @@ public class Empty_Trash : QuestObjects
         //쓰레기 위치 초기화
         for (int ii = 0; ii < m_TrashOBJ.Length; ii++)
         {
-            m_TrashOBJ[ii] = m_TrashPos[ii];
+            m_TrashOBJ[ii].rectTransform.anchoredPosition = m_TrashPos[ii];
         }
 
         //퀘스트 수행중 닫기 버튼 클릭시 초기화 및 캔버스 끄기
