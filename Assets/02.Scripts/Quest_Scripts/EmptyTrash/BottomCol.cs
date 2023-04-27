@@ -16,23 +16,13 @@ public class BottomCol : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D coll)
+    private void OnTriggerStay2D(Collider2D coll) //버튼 클릭시 쓰레기 오브젝트 끄기
     {
-        Debug.Log(coll.gameObject.name);
+        //Debug.Log(coll.gameObject.name);
 
         if (coll.tag == "Leave")
         {
-            Destroy(coll.gameObject);
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D coll)
-    {
-        Debug.Log(coll.gameObject.name);
-
-        if (coll.tag == "Leave")
-        {
-            Destroy(coll.gameObject);
+            coll.gameObject.SetActive(false);
         }
     }
 }

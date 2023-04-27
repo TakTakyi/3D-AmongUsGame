@@ -84,10 +84,7 @@ public class ClaerOxygenFilter : QuestObjects
             }
             
         }
-        if (a_MsObj.gameObject.activeSelf == true)
-        {
-            return false;
-        }
+        
         return true;
     }
 
