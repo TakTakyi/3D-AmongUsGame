@@ -52,7 +52,7 @@ public class ConvertEnergy : QuestObjects
             if (m_BackImg.sprite == m_BackSprite)
             {
                 Timer -= Time.deltaTime;
-                Debug.Log(Timer);
+                //Debug.Log(Timer);
                 if (Timer <= 0.0f)
                 {
                     QuestComp();
