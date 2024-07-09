@@ -102,8 +102,8 @@ public class HeroCrtl : MonoBehaviour
 
         if (this.gameObject.transform.position.y >= 0.1f)
         {
-            Debug.Log(_velocity.y);
-            Debug.Log(this.gameObject.transform.position.y);
+            //Debug.Log(_velocity.y);
+            //Debug.Log(this.gameObject.transform.position.y);
             _velocity.y = 0.0f;
         }
 
