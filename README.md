@@ -6,8 +6,10 @@
 - 씬 폴더
 - Dev 개발폴더
     - NoMult 포톤을 적용하지 않는 폴더
-          - Game Scene 퀘스트 구현용 씬
-          - Lobby Scene 로비씬(캐릭터 움직임 및 패럴씽크 테스트용 씬)
+
+       - Game Scene 퀘스트 구현용 씬
+          
+       - Lobby Scene 로비씬(캐릭터 움직임 및 패럴씽크 테스트용 씬)
     - Photon 포톤을 적용하는 폴더
         - PhotonGameScene 포톤 서버를 적용할 게임씬
         - TitleScene 로그인 및 회원가입용 씬
